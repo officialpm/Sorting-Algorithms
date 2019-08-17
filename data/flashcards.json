@@ -1,0 +1,207 @@
+[
+  {
+    "name": "Selection Sort",
+    "properties": {
+      "stable": true,
+      "inPlace": true
+    },
+    "description": "Selects the smallest element and swaps it with the current item.",
+    "pseudocode": "void selectionSort(int numbers[], int array_size)\n{\n  int i, j;\n  int min, temp;\n\n  for (i = 0; i < array_size-1; i++)\n  {\n    min = i;\n    for (j = i+1; j < array_size; j++)\n    {\n      if (numbers[j] < numbers[min])\n        min = j;\n    }\n    temp = numbers[i];\n    numbers[i] = numbers[min];\n    numbers[min] = temp;\n  }\n}",
+    "assessment": {
+      "pros": [
+        "simple and easy to implement"
+      ],
+      "cons": [
+        "inefficient for large lists",
+        "similar to insertion sort which is more efficient and should be used in its place",
+        "is no faster on partially sorted list"
+      ]
+    },
+    "complexity": {
+      "time": {
+        "best": "n^2",
+        "average": "n^2",
+        "worst": "n^2"
+      },
+      "space": {
+        "worst": "1"
+      }
+    }
+  },
+  {
+    "name": "Insertion Sort",
+    "properties": {
+      "stable": true,
+      "inPlace": true
+    },
+    "description": "Inserts the next element at the correct position.",
+    "pseudocode": "void insertionSort(int numbers[], int array_size)\n{\n  int i, j, index;\n\n  for (i=1; i < array_size; i++)\n  {\n    index = numbers[i];\n    j = i;\n    while ((j > 0) && (numbers[j-1] > index))\n    {\n      numbers[j] = numbers[j-1];\n      j = j - 1;\n    }\n    numbers[j] = index;\n  }\n}",
+    "assessment": {
+      "pros": [
+        "takes advantage of sorted or nearly sorted lists",
+        "used when knowing that list has changed very little since it was last sorted"
+      ],
+      "cons": [
+        "worst case is quite poor",
+        "insertion is slow because all the elements after it have to be moved up"
+      ]
+    },
+    "complexity": {
+      "time": {
+        "best": "n",
+        "average": "n^2",
+        "worst": "n^2"
+      },
+      "space": {
+        "worst": "1"
+      }
+    }
+  },
+  {
+    "name": "Bubble Sort",
+    "properties": {
+      "stable": true,
+      "inPlace": true
+    },
+    "description": "Compares each item in the list with the item next to it, and swaps them so that they are arranged in order. This process repeats until it makes a pass all the way through the list without swapping any items.",
+    "pseudocode": "void bubbleSort(int numbers[], int array_size)\n{\n  int i, j, temp;\n\n  for (i = (array_size - 1); i >= 0; i--)\n  {\n    for (j = 1; j <= i; j++)\n    {\n      if (numbers[j-1] > numbers[j])\n      {\n        temp = numbers[j-1];\n        numbers[j-1] = numbers[j];\n        numbers[j] = temp;\n      }\n    }\n  }\n}",
+    "assessment": {
+      "pros": [
+        "easy to implement",
+        "elements are swapped in place without using additional temporary storage",
+        "quick on already sorted list"
+      ],
+      "cons": [
+        "shouldn't be used for a lists containing a huge number of items unless the list is nearly sorted",
+        "one of the slowest sorts invented"
+      ]
+    },
+    "complexity": {
+      "time": {
+        "best": "n",
+        "average": "n^2",
+        "worst": "n^2"
+      },
+      "space": {
+        "worst": "1"
+      }
+    }
+  },
+  {
+    "name": "Merge Sort",
+    "properties": {
+      "stable": false,
+      "inPlace": false
+    },
+    "description": "Divides the set into the smallest possible groups immediately then reconstructs them incrementally as it sorts the groupings",
+    "pseudocode": "void mergeSort(int numbers[], int temp[], int array_size)\n{\n  m_sort(numbers, temp, 0, array_size - 1);\n}\n\n\nvoid m_sort(int numbers[], int temp[], int left, int right)\n{\n  int mid;\n\n  if (right > left)\n  {\n    mid = (right + left) / 2;\n    m_sort(numbers, temp, left, mid);\n    m_sort(numbers, temp, mid+1, right);\n\n    merge(numbers, temp, left, mid+1, right);\n  }\n}\n\nvoid merge(int numbers[], int temp[], int left, int mid, int right)\n{\n  int i, left_end, num_elements, tmp_pos;\n\n  left_end = mid - 1;\n  tmp_pos = left;\n  num_elements = right - left + 1;\n\n  while ((left <= left_end) && (mid <= right))\n  {\n    if (numbers[left] <= numbers[mid])\n    {\n      temp[tmp_pos] = numbers[left];\n      tmp_pos = tmp_pos + 1;\n      left = left +1;\n    }\n    else\n    {\n      temp[tmp_pos] = numbers[mid];\n      tmp_pos = tmp_pos + 1;\n      mid = mid + 1;\n    }\n  }\n\n  while (left <= left_end)\n  {\n    temp[tmp_pos] = numbers[left];\n    left = left + 1;\n    tmp_pos = tmp_pos + 1;\n  }\n  while (mid <= right)\n  {\n    temp[tmp_pos] = numbers[mid];\n    mid = mid + 1;\n    tmp_pos = tmp_pos + 1;\n  }\n\n  for (i=0; i <= num_elements; i++)\n  {\n    numbers[right] = temp[right];\n    right = right - 1;\n  }",
+    "assessment": {
+      "pros": [
+        "good worst-case performance",
+        "the number of comparisons it performs is optimal in the largest-order term",
+        "it takes at most $n\\log_2 n - n + 1$ comparisons",
+        "marginally faster than the heap sort for larger sets"
+      ],
+      "cons": [
+        "allocation of another array and copying elements to it can be quite expensive"
+      ]
+    },
+    "complexity": {
+      "time": {
+        "best": "n\\log(n)",
+        "average": "n\\log(n)",
+        "worst": "n\\log(n)"
+      },
+      "space": {
+        "worst": "n"
+      }
+    }
+  },
+  {
+    "name": "Quick Sort",
+    "properties": {
+      "stable": false,
+      "inPlace": true
+    },
+    "description": "Continually divides the set by the average, until the set is recursively sorted.",
+    "pseudocode": "void quickSort(int numbers[], int array_size)\n{\n  q_sort(numbers, 0, array_size - 1);\n}\n\n\nvoid q_sort(int numbers[], int left, int right)\n{\n  int pivot, l_hold, r_hold;\n\n  l_hold = left;\n  r_hold = right;\n  pivot = numbers[left];\n  while (left < right)\n  {\n    while ((numbers[right] >= pivot) && (left < right))\n      right--;\n    if (left != right)\n    {\n      numbers[left] = numbers[right];\n      left++;\n    }\n    while ((numbers[left] <= pivot) && (left < right))\n      left++;\n    if (left != right)\n    {\n      numbers[right] = numbers[left];\n      right--;\n    }\n  }\n  numbers[left] = pivot;\n  pivot = left;\n  left = l_hold;\n  right = r_hold;\n  if (left < pivot)\n    q_sort(numbers, left, pivot-1);\n  if (right > pivot)\n    q_sort(numbers, pivot+1, right);\n}",
+    "assessment": {
+      "pros": [
+        "likely faster in practice than Merge Sort",
+        "computer architecture favors the Quick Sort process"
+      ],
+      "cons": [
+        "absolute worst case is $O(n^2)$, this can be minimized by choosing pivot points randomly",
+        "very complex algorithm",
+        "massively recursive, can cause stack overflow"
+      ]
+    },
+    "complexity": {
+      "time": {
+        "best": "n\\log(n)",
+        "average": "n\\log(n)",
+        "worst": "n^2"
+      },
+      "space": {
+        "worst": "\\log(n)"
+      }
+    }
+  },
+  {
+    "name": "Heap Sort",
+    "properties": {
+      "stable": false,
+      "inPlace": true
+    },
+    "description": "Add the elements to a heap one at a time. Then remove the elements from the top of the heap one at a time, and they will be in order.",
+    "pseudocode": "void heapSort(int numbers[], int array_size)\n{\n  int i, temp;\n\n  for (i = (array_size / 2)-1; i >= 0; i--)\n    siftDown(numbers, i, array_size);\n\n  for (i = array_size-1; i >= 1; i--)\n  {\n    temp = numbers[0];\n    numbers[0] = numbers[i];\n    numbers[i] = temp;\n    siftDown(numbers, 0, i-1);\n  }\n}\n\n\nvoid siftDown(int numbers[], int root, int bottom)\n{\n  int done, maxChild, temp;\n\n  done = 0;\n  while ((root*2 <= bottom) && (!done))\n  {\n    if (root*2 == bottom)\n      maxChild = root * 2;\n    else if (numbers[root * 2] > numbers[root * 2 + 1])\n      maxChild = root * 2;\n    else\n      maxChild = root * 2 + 1;\n\n    if (numbers[root] < numbers[maxChild])\n    {\n      temp = numbers[root];\n      numbers[root] = numbers[maxChild];\n      numbers[maxChild] = temp;\n      root = maxChild;\n    }\n    else\n      done = 1;\n  }\n}",
+    "assessment": {
+      "pros": [
+        "guarantees $O(n\\log(n))$",
+        "faster than merge sort which since it doesn't have to create a second array"
+      ],
+      "cons": [
+        "may make more comparisons than optimal",
+        "slower than merge and quick sorts"
+      ]
+    },
+    "complexity": {
+      "time": {
+        "best": "n\\log(n)",
+        "average": "n\\log(n)",
+        "worst": "n\\log(n)"
+      },
+      "space": {
+        "worst": "1"
+      }
+    }
+  },
+  {
+    "name": "Counting Sort",
+    "properties": {
+      "stable": true,
+      "inPlace": false
+    },
+    "description": "Works by counting the number of objects having distinct key values (kind of hashing). Then doing some arithmetic to calculate the position of each object in the output sequence.",
+    "pseudocode": "void countingSort(char arr[])\n{\n  int n = arr.length;\n\n  // The output character array that will have sorted arr\n  char output[] = new char[n];\n\n  // Create a count array to store count of inidividul\n  // characters and initialize count array as 0\n  int count[] = new int[256];\n  for (int i=0; i<256; ++i) count[i] = 0;\n\n  // store count of each character\n  for (int i=0; i<n; ++i) ++count[arr[i]];\n\n  // Change count[i] so that count[i] now contains actual\n  // position of this character in output array\n  for (int i=1; i<=255; ++i)\n    count[i] += count[i-1];\n\n  // Build the output character array\n  for (int i = 0; i<n; ++i)\n  {\n    output[count[arr[i]]-1] = arr[i];\n    --count[arr[i]];\n  }\n\n  for (int i = 0; i < n; ++i) arr[i] = output[i];\n}\n",
+    "assessment": {
+      "pros": [
+        "its efficiency depents on a range of input data",
+        "not comparison based"
+      ],
+      "cons": [
+        "becomes inefficient if a range of input data is siginificantly greater than number of objects to be sorted"
+      ]
+    },
+    "complexity": {
+      "time": {
+        "best": "n + k",
+        "average": "n + k",
+        "worst": "n + k"
+      },
+      "space": {
+        "worst": "k"
+      }
+    }
+  }
+]

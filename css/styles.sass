@@ -1,0 +1,113 @@
+@import "includes/variables"
+@import "includes/layout"
+
+*
+  margin: 0
+  padding: 0
+
+ul
+  margin-top: 0.5em
+  li
+    margin-left: 1em
+    
+body
+  display: flex
+  align-items: center
+  justify-content: center
+  min-height: 100vh
+  color: rgba(0,0,0,0.87)
+  font-family: 'Roboto', sans-serif
+  font-size: 14px
+  
+pre
+  font-family: 'Roboto Mono', monospace
+  font-size: 0.9em
+  
+.app
+  max-width: 600px
+  min-height: 300px
+  display: flex
+  align-items: center
+    
+  .flashcard
+    width: 100%
+    padding: 1em
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+    > * + *
+      margin-top: 1em
+    &__flex
+      display: flex
+      align-items: center
+      &__properties
+        display: flex
+        &__property
+          display: flex
+          align-items: center
+          margin: auto 1em
+    &__assessment
+      display: flex
+      justify-content: space-between
+      &__comparison
+        flex-basis: 48%
+        i
+          display: block
+          text-align: center
+        &--pros
+          i
+            color: #4CAF50
+        &--cons
+          i
+            color: #f44336
+      
+    &__complexity
+      margin: inherit auto
+      border-collapse: collapse
+      width: 100%
+      table-layout: fixed
+      text-align: center
+      &__cell
+        border: 1px solid rgba(0,0,0,0.54)
+        height: 2em
+
+  .button
+    position: relative
+    top: 50%
+    transform: translateY(-50%)
+    font-size: 1.5em
+    border: none
+    cursor: pointer
+    border-radius: 50%
+    min-width: 1.5em
+    min-height: 1.5em
+    transition: all 300ms ease-in-out
+    &:hover
+      background: rgba(0,0,0,0.54)
+    &--left
+      
+      margin-right: 0.5em
+    &--right
+      margin-left: 0.5em
+        
+.credits 
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 100%
+  text-decoration: none
+  margin-top: 0.5em
+  &__icon
+    display: block
+    color: rgba(0,0,0,0.87)
+    &--code
+      color: $orange-500
+    &--favorite
+      color: $red-500
+  &__text
+    display: block
+    margin: 0 6px
+    color: rgba(0,0,0,0.54)
+  &__img
+    display: block
+    height: 2em
+    width: auto
+  
