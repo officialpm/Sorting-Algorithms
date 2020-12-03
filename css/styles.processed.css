@@ -143,6 +143,19 @@ pre {
   margin-top: 0.5em;
 }
 
+
+.star {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  text-decoration: none;
+  margin-top: 0.5em;
+}
+
 .credits__icon {
   display: block;
   color: rgba(0, 0, 0, 0.87);

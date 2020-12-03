@@ -1,5 +1,6 @@
-import { Flashcard } from "./components/flashcard";
-import { Credits } from "./components/credits";
+import { Flashcard } from './components/flashcard';
+import { Credits } from './components/credits';
+import { Star } from './components/star';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    $.getJSON("./data/flashcards.json", response =>
+    $.getJSON('./data/flashcards.json', response =>
       this.setState({ flashcards: response, flashcard: response[0] })
     );
   }
@@ -35,6 +36,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
+        <Star />
+
         <div className="app">
           <button
             onClick={this.leftButtonClick}
@@ -42,14 +45,13 @@ class App extends React.Component {
           >
             keyboard_arrow_left
           </button>
-          {this.state.flashcard
-            ? <Flashcard
-                className="flashcard"
-                flashcard={this.state.flashcard}
-              />
-            : <div className="flashcard flashcard--placeholder">
-                <p className="loading-message">Loading...</p>
-              </div>}
+          {this.state.flashcard ? (
+            <Flashcard className="flashcard" flashcard={this.state.flashcard} />
+          ) : (
+            <div className="flashcard flashcard--placeholder">
+              <p className="loading-message">Loading...</p>
+            </div>
+          )}
           <button
             onClick={this.rightButtonClick}
             className="material-icons button button--right"
@@ -63,4 +65,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(<App />, document.getElementById('app'));
